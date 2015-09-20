@@ -1,0 +1,4 @@
+# Ignore .idea .out folders
+.idea
+.out
+External Libraries
