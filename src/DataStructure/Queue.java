@@ -23,4 +23,8 @@ public class Queue {
         return number;
     }
 
+    public int size(){
+        return list.size();
+    }
+
 }

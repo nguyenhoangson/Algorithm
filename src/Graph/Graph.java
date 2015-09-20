@@ -74,4 +74,8 @@ public class Graph {
             System.out.print(item + " ");
         }
     }
+
+    public List<Integer> getVertices(){
+        return vertices;
+    }
 }

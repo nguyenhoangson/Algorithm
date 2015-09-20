@@ -4,8 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 
 import static org.junit.Assert.*;
-import Graph.Graph;
+import Graph.*;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * Created by livetolove128 on 19/9/15.
@@ -35,7 +37,6 @@ public class GraphExplorerTest {
         g.addEdge(5, 6);
         g.addEdge(6, 7);
 
-        g.printGraph();
     }
 
     @After
@@ -45,6 +46,12 @@ public class GraphExplorerTest {
 
     @Test
     public void testBFS(){
+        GraphExplorer explorer = new GraphExplorer();
+        List<Integer> list =  explorer.BFS(0, g);
+
+        for(int item: list){
+            System.out.print(item);
+        }
 
     }
 }

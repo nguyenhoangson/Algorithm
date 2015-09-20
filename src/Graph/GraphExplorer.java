@@ -1,5 +1,7 @@
 package Graph;
 
+import DataStructure.Queue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +13,24 @@ public class GraphExplorer {
     // Methods
     public List<Integer> BFS(int startVertex, Graph g){
 
-        // Visit all the incident vertices of startVertex
-            // Put them in a list to mark a next-visited
-            // Mark each as visited
-
-
+        Queue visitList =  new Queue();
         List <Integer> exploredVertices = new ArrayList<>();
+        int item = 0;
+
+        visitList.enqueue(startVertex);
+        exploredVertices.add(startVertex);
+
+
+        while(visitList.size() > 0) {
+            item = visitList.dequeue();
+            for(int incident: g.getIncidentVertices(item)){
+                if (!exploredVertices.contains(incident)) {
+                    exploredVertices.add(incident);
+                    visitList.enqueue(incident);
+                }
+            }
+        }
+
         return exploredVertices;
     }
 
