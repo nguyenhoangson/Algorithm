@@ -15,7 +15,7 @@ public class GraphExplorer {
 
         Queue visitList =  new Queue();
         List <Integer> exploredVertices = new ArrayList<>();
-        int item = 0;
+        int item;
 
         visitList.enqueue(startVertex);
         exploredVertices.add(startVertex);
@@ -34,9 +34,26 @@ public class GraphExplorer {
         return exploredVertices;
     }
 
-    public List<Integer> DFS(int startVertex, Graph g){
+    public List<Integer> DFS(Graph g){
 
         List <Integer> exploredVertices = new ArrayList<>();
+
+        for(int vertex: g.getVertices()){
+            DFSVisit(vertex, g, exploredVertices);
+        }
+
         return exploredVertices;
+    }
+
+    // Traverse through all reachable vertices from vertex
+    public void DFSVisit(int vertex, Graph g, List<Integer> exploredVertices){
+
+        for(int item: g.getIncidentVertices(vertex)){
+            if(!exploredVertices.contains(item)){
+                exploredVertices.add(item);
+                DFSVisit(item, g, exploredVertices);
+            }
+        }
+        return;
     }
 }

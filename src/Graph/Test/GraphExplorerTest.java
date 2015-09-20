@@ -15,10 +15,12 @@ import java.util.List;
 public class GraphExplorerTest {
 
     public Graph g;
+    public GraphExplorer explorer;
 
     @Before
     public void setUp() throws Exception {
         g = new Graph();
+        explorer = new GraphExplorer();
 
         // Add vertices
         for(int i = 0; i <= 7; i++){
@@ -42,16 +44,29 @@ public class GraphExplorerTest {
     @After
     public void tearDown() throws Exception {
         g = null;
+        explorer = null;
     }
 
     @Test
     public void testBFS(){
-        GraphExplorer explorer = new GraphExplorer();
+
         List<Integer> list =  explorer.BFS(0, g);
 
+        System.out.println("BFS: ");
         for(int item: list){
             System.out.print(item);
         }
+        System.out.println("");
+    }
 
+    @Test
+    public void testDFS(){
+        List<Integer> list = explorer.DFS(g);
+
+        System.out.println("DFS: ");
+        for(int item: list){
+            System.out.print(item);
+        }
+        System.out.println("");
     }
 }
