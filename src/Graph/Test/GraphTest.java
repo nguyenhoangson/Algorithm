@@ -2,7 +2,6 @@ package Graph.Test;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -72,25 +71,5 @@ public class GraphTest {
         assertSame("Should add edge", true, g.isEdge(first, second));
         assertSame("Should add edge", true, g.isEdge(second, first));
     }
-
-    @Test
-    public void itShouldGetAllIncidentEdges(){
-
-        // Add vertices
-        for(int i = 0; i <= 7; i++){
-            g.addVertex(i);
-        }
-
-        // Add edges
-        g.addEdge(0, 1);
-        g.addEdge(0, 2);
-        g.addEdge(0, 3);
-        g.addEdge(0, 5);
-
-        for(int item: g.getIncidentVertices(0)){
-            System.out.print(item + " ");
-        }
-    }
-
 
 }
