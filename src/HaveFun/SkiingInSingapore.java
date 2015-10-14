@@ -1,6 +1,10 @@
 package HaveFun;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -64,8 +68,42 @@ public class SkiingInSingapore {
 
     /* TODO: make matrix based on input file */
     /* Make multi-dimension array from input file */
-    public double[][] makeMatrix(File file){
-        double[][] myMatrix = new double[5][5];
+    public int[][] makeMatrix(String filePath) throws IOException {
+        int[][] myMatrix = new int[0][];
+        int line = 0;
+        int count;
+        int row = 0;
+        int col = 0;
+
+        // read file from filePath
+        for (String lineContent : Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)){
+            line++;
+            count = 0;
+            for (String part : lineContent.split("\\s+")){
+                Integer i = Integer.valueOf(part);
+
+                // get size of the matrix
+                if(line == 1){
+                    if(count == 0){
+                        row = i;
+                    }
+
+                    if(count == 1){
+                        col = i;
+                    }
+                }
+
+                // get number for each cell of the matrix
+                if(line > 1 && line < row + 2){
+                    if(count < col){
+                        myMatrix[line-2][count] = i;
+                    }
+                }
+                count++;
+            }
+            if(line == 1)
+                myMatrix = new int[row][col];
+        }
         return myMatrix;
     }
 
