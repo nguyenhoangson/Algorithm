@@ -139,7 +139,7 @@ public class SkiingInSingaporeTest {
 
     @Test
     public void itShouldReturnTheProperLongestPath() throws IOException{
-        String pathFile = "/home/livetolove128/IdeaProjects/Algorithm/src/HaveFun/test.txt";
+        String pathFile = "/home/livetolove128/IdeaProjects/Algorithm/src/HaveFun/map.txt";
         int[][] matrix;
         Hashtable<String, Integer> result;
 
@@ -147,9 +147,9 @@ public class SkiingInSingaporeTest {
         result = ski.findLongestPathOfAMatrix(matrix);
         System.out.println("Start point: " + result.get("StartRow") + " " + result.get("StartCol"));
         System.out.println("End point: " + result.get("EndRow") + " " + result.get("EndCol"));
-        System.out.println("Start point: " + matrix[1][2]);
-        System.out.println("End point: " + matrix[3][2]);
-        assertSame(5, result.get("Length"));
+        System.out.println("Start point: " + matrix[161][395]);
+        System.out.println("End point: " + matrix[161][397]);
+        assertSame(15, result.get("Length"));
 
     }
 }
