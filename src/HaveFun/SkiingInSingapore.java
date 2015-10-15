@@ -100,9 +100,13 @@ public class SkiingInSingapore {
                     }
                 }
                 count++;
+
+
             }
             if(line == 1)
                 myMatrix = new int[row][col];
+            if(line > row + 1)
+                break;
         }
         return myMatrix;
     }
@@ -126,13 +130,15 @@ public class SkiingInSingapore {
 
         result.put("Length", 1); // result returned tells us about information of the path
         result.put("Drop", 0);
+        result.put("StartRow", row);
+        result.put("StartCol", col);
 
         /* algorithm */
 
         // build node at each level
         while(pathList.get(level).size() != 0){
 
-            pathList.put(level + 1, new ArrayList<>()); // Initialize level + 1
+            pathList.put(level + 1, new ArrayList<>()); // Initialize next level
             temp = pathList.get(level+1);
 
             for(Node node: pathList.get(level)){
@@ -157,9 +163,13 @@ public class SkiingInSingapore {
 
         // get the smallest node in the last level
         min = pathList.get(level - 1).get(0).data;
+        result.put("EndRow", pathList.get(level - 1).get(0).row);
+        result.put("EndCol", pathList.get(level - 1).get(0).col);
         for(Node node: pathList.get(level-1)){
             if(min < node.data){
                 min = node.data;
+                result.put("EndRow", node.row);
+                result.put("EndCol", node.col);
             }
         }
 
@@ -176,8 +186,8 @@ public class SkiingInSingapore {
         Hashtable<String, Integer> temp;
 
         // initialize
-        row = matrix.length - 1;
-        col = matrix[0].length - 1;
+        row = matrix.length;
+        col = matrix[0].length;
         result.put("Length", 1);
         result.put("Drop", 0);
 
@@ -186,26 +196,47 @@ public class SkiingInSingapore {
             for(int j = 0; j < col; j++){
                 if(i >= 1 && matrix[i][j] < matrix[i-1][j])
                     continue;
-                if(i < row && matrix[i][j] < matrix[i+1][j])
+                if(i < row - 1 && matrix[i][j] < matrix[i+1][j])
                     continue;
                 if(j >= 1 && matrix[i][j] < matrix[i][j-1])
                     continue;
-                if(j < col && matrix[i][j] < matrix[i][j+1])
+                if(j < col - 1 && matrix[i][j] < matrix[i][j+1])
                     continue;
 
                 temp = findLongestPathOfAPoint(i, j, matrix);
                 if(temp.get("Length") > result.get("Length")){
                     result.put("Length", temp.get("Length"));
                     result.put("Drop", temp.get("Drop"));
+                    result.put("StartRow", temp.get("StartRow"));
+                    result.put("StartCol", temp.get("StartCol"));
+                    result.put("EndRow", temp.get("EndRow"));
+                    result.put("EndCol", temp.get("EndCol"));
                 }
 
                 if(temp.get("Length").equals(result.get("Length")) && temp.get("Drop") > result.get("Drop")){
                     result.put("Drop", temp.get("Drop"));
+                    result.put("StartRow", temp.get("StartRow"));
+                    result.put("StartCol", temp.get("StartCol"));
+                    result.put("EndRow", temp.get("EndRow"));
+                    result.put("EndCol", temp.get("EndCol"));
                 }
             }
         }
 
         return result;
+    }
+
+    public void printMatrix(int[][] matrix){
+        int row = matrix.length - 1;
+        int col = matrix[0].length - 1;
+
+        for(int i = 0; i <= row; i++){
+            for(int j = 0; j <= col; j++){
+                System.out.print(matrix[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 
 }

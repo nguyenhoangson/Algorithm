@@ -145,8 +145,11 @@ public class SkiingInSingaporeTest {
 
         matrix = ski.makeMatrix(pathFile);
         result = ski.findLongestPathOfAMatrix(matrix);
-        System.out.println(result.get("Length"));
-        System.out.println(result.get("Drop"));
+        System.out.println("Start point: " + result.get("StartRow") + " " + result.get("StartCol"));
+        System.out.println("End point: " + result.get("EndRow") + " " + result.get("EndCol"));
+        System.out.println("Start point: " + matrix[1][2]);
+        System.out.println("End point: " + matrix[3][2]);
+        assertSame(5, result.get("Length"));
 
     }
 }
